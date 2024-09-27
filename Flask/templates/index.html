@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AR Application</title>
+    <script>
+        function validateFileSize() {
+            const markerImage = document.getElementById('marker_image').files[0];
+            const overlayMedia = document.getElementById('overlay_media').files[0];
+
+            if (markerImage.size > 2 * 1024 * 1024 || overlayMedia.size > 2 * 1024 * 1024) { // 2 MB limit
+                alert("Files must be smaller than 2MB!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Upload Marker and Overlay Media</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateFileSize();">
+        <label for="marker_image">Marker Image:</label>
+        <input type="file" name="marker_image" id="marker_image" required><br><br>
+        <label for="overlay_media">Overlay Media (Image or Video):</label>
+        <input type="file" name="overlay_media" id="overlay_media" required><br><br>
+        <label for="media_type">Media Type:</label>
+        <select name="media_type" id="media_type">
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+        </select><br><br>
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>
